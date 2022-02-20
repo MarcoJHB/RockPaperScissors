@@ -8,7 +8,7 @@ let round = 0;
 
 // First, the computer needs to create a random choice from Rock, Paper, Scissors
 
-const computerSelection = function computerPlay() {
+function computerPlay() {
   //define Rock, paper, scissors array
   let gameSelection = ["rock", "paper", "scissors"];
 
@@ -18,19 +18,19 @@ const computerSelection = function computerPlay() {
   let randThree = Math.floor(Math.random() * 3);
   let computerChoice = gameSelection[randThree];
   // Now it just needs to entered into the answer
+  // console.log(`The computer chose ${computerChoice}`);
   return computerChoice;
 };
-
-// this runs the computer's choice
-// computerPlay();
 
 // Player selection
 // Prompts the player to choose rock, paper or scissors
 
-const playerSelection = () => {
-  let playerChoice = prompt("Choose!").toLowerCase();
-  return playerChoice;
-};
+
+// function playerSelection {
+//   let playerChoice = this.value;
+//   console.log(`You clicked on ${playerChoice} good job!`);
+//   return playerChoice;
+// };
 
 // Game is played and this decides who wins
 // IF computer chooses rock and player chooses paper, player wins, "You win, Paper beats Rock!"
@@ -38,37 +38,61 @@ const playerSelection = () => {
 // Win Conditions
 // Paper > Rock, Scissors > Paper, Rock > Scissors
 
-function playRound(playerSelection, computerSelection) {
-  if (computerSelection == playerSelection) {
-    console.log(`It's a tie! You both chose ${computerSelection}`);
+const latestScore = document.querySelector('.latest-score');
+const totalScore = document.querySelector('.total-score')
+
+function playRound() {
+  let userChoice = this.value;
+  // console.log(`You clicked on ${userChoice}, now to get the rest working`);
+  let computerChoice = computerPlay();
+  // console.log(`PC clicked on ${computerChoice}, now to get the rest working`);
+  
+  if (computerChoice == userChoice) {
+    console.log(`It's a tie! You both chose ${computerChoice}`);
+    latestScore.textContent = "It's a tie! You both chose " + computerChoice;
   } else if (
-    (computerSelection == "rock" && playerSelection == "paper") ||
-    (computerSelection == "paper" && playerSelection == "scissors") ||
-    (computerSelection == "scissors" && playerSelection == "rock")
+    (computerChoice == "rock" && userChoice == "paper") ||
+    (computerChoice == "paper" && userChoice == "scissors") ||
+    (computerChoice == "scissors" && userChoice == "rock")
   ) {
-    console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+    console.log(`You win! ${userChoice} beats ${computerChoice}`);
+    latestScore.textContent = "You win! " + userChoice + " beats " + computerChoice;
     playerScore++;
   } else if (
-    (computerSelection == "paper" && playerSelection == "rock") ||
-    (computerSelection == "scissors" && playerSelection == "paper") ||
-    (computerSelection == "rock" && playerSelection == "paper")
+    (computerChoice == "paper" && userChoice == "rock") ||
+    (computerChoice == "scissors" && userChoice == "paper") ||
+    (computerChoice == "rock" && userChoice == "paper")
   ) {
-    console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
+    console.log(`You lose! ${computerChoice} beats ${userChoice}`);
+    latestScore.textContent = "You win! " + computerChoice + " beats " + userChoice;
     computerScore++;
   }
   round++;
+  totalScore.textContent = "You have " + playerScore + " points. The computer has " + computerScore + " points.";
   console.log(
     `Round ${round}: You have ${playerScore} points. The computer has ${computerScore} points.`
   );
+
+  game();
 }
 
 // Best of 5 game
 
 function game() {
   for (let i = 0; i < 5; i++) {
-    playRound(playerSelection(), computerSelection());
-  }
+
   if (playerScore > computerScore) {
     console.log("Well done, you won!");
   } else console.log("Sorry, the computer won!");
+} 
 }
+
+
+/////////////////// UPDATE - ADDING UI AND CHECKING SELECTION
+
+
+// console.log(`You clicked on ${buttonValue}`);
+// playerSelection = buttonValue;
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => button.addEventListener("click", playRound));
