@@ -5,6 +5,7 @@
 let playerScore = 0;
 let computerScore = 0;
 let round = 0;
+let maxRound = 5;
 
 // First, the computer needs to create a random choice from Rock, Paper, Scissors
 
@@ -20,11 +21,10 @@ function computerPlay() {
   // Now it just needs to entered into the answer
   // console.log(`The computer chose ${computerChoice}`);
   return computerChoice;
-};
+}
 
 // Player selection
 // Prompts the player to choose rock, paper or scissors
-
 
 // function playerSelection {
 //   let playerChoice = this.value;
@@ -38,15 +38,14 @@ function computerPlay() {
 // Win Conditions
 // Paper > Rock, Scissors > Paper, Rock > Scissors
 
-const latestScore = document.querySelector('.latest-score');
-const totalScore = document.querySelector('.total-score')
+const latestScore = document.querySelector(".latest-score");
+const totalScore = document.querySelector(".total-score");
+const winner = document.querySelector(".winner");
 
 function playRound() {
   let userChoice = this.value;
-  // console.log(`You clicked on ${userChoice}, now to get the rest working`);
   let computerChoice = computerPlay();
-  // console.log(`PC clicked on ${computerChoice}, now to get the rest working`);
-  
+
   if (computerChoice == userChoice) {
     console.log(`It's a tie! You both chose ${computerChoice}`);
     latestScore.textContent = "It's a tie! You both chose " + computerChoice;
@@ -56,7 +55,11 @@ function playRound() {
     (computerChoice == "scissors" && userChoice == "rock")
   ) {
     console.log(`You win! ${userChoice} beats ${computerChoice}`);
-    latestScore.textContent = "You win! " + userChoice + " beats " + computerChoice;
+    latestScore.textContent =
+      "You win! " +
+      userChoice.toUpperCase() +
+      " beats " +
+      computerChoice.toUpperCase();
     playerScore++;
   } else if (
     (computerChoice == "paper" && userChoice == "rock") ||
@@ -64,35 +67,64 @@ function playRound() {
     (computerChoice == "rock" && userChoice == "paper")
   ) {
     console.log(`You lose! ${computerChoice} beats ${userChoice}`);
-    latestScore.textContent = "You win! " + computerChoice + " beats " + userChoice;
+    latestScore.textContent =
+      "You win! " +
+      computerChoice.toUpperCase() +
+      " beats " +
+      userChoice.toUpperCase();
     computerScore++;
   }
   round++;
-  totalScore.textContent = "You have " + playerScore + " points. The computer has " + computerScore + " points.";
+  totalScore.textContent =
+    "Player: " + playerScore + " | Computer: " + computerScore + "";
   console.log(
     `Round ${round}: You have ${playerScore} points. The computer has ${computerScore} points.`
   );
 
-  game();
+  // Select number of rounds before game ends
+
+  if (round >= maxRound) {
+    if (playerScore > computerScore) {
+      console.log(
+        `You win! You beat the computer with a score of ${playerScore} to ${computerScore}`
+      );
+      winner.textContent =
+        "Congrats! You beat the computer with a score of " +
+        playerScore +
+        " to " +
+        computerScore +
+        ".";
+      replayBtn.classList.remove("end-round");
+    } else {
+      console.log(
+        `You lose! The computer won with a score of ${computerScore} to ${playerScore}`
+      );
+      winner.textContent =
+        "You lose! The computer won with a score of " +
+        computerScore +
+        " to " +
+        playerScore +
+        ".";
+      replayBtn.classList.remove("end-round");
+    }
+  }
 }
-
-// Best of 5 game
-
-function game() {
-  for (let i = 0; i < 5; i++) {
-
-  if (playerScore > computerScore) {
-    console.log("Well done, you won!");
-  } else console.log("Sorry, the computer won!");
-} 
-}
-
 
 /////////////////// UPDATE - ADDING UI AND CHECKING SELECTION
 
-
-// console.log(`You clicked on ${buttonValue}`);
-// playerSelection = buttonValue;
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll(".player-btn");
 
 buttons.forEach((button) => button.addEventListener("click", playRound));
+
+const replayBtn = document.querySelector("#player-btn");
+replayBtn.addEventListener("click", resetGame);
+
+function resetGame() {
+  console.log("game reset!");
+  latestScore.textContent = "Good luck!";
+  totalScore.textContent = "Player: 0 | Computer: 0";
+  winner.textContent = "🪨 beats ✂️, ✂️ beats 📃, 📃 beats 🪨.";
+  playerScore = 0;
+  computerScore = 0;
+  round = 0;
+}

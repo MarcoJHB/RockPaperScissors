@@ -4,17 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-    <button id="rock-btn" class="rock-btn" value="rock">Rock</button>
-    <button id="paper-btn" class="paper-btn" value="paper">Paper</button>
-    <button id="scissors-btn" class="scissors-btn" value="scissors">Scissors</button>
-    <section class="score-section">
-        <div class="latest-score"></div>
-        <div class="total-score"></div>
+    <div class="container">
+    <section class="title-section">
+        <h1>Welcome to Rock, Paper, Scissors!</h1>
+        <h2>Choose your hand below</h2>
     </section>
+    
+    <section class="button-area">
+        <button id="rock-btn" class="player-btn" value="rock">🪨</button>
+        <button id="paper-btn" class="player-btn" value="paper">📃</button>
+        <button id="scissors-btn" class="player-btn" value="scissors">✂️</button>
+    </section>
+
+    <section class="score-section">
+        <div class="latest-score">Good luck!</div>
+        <div class="total-score">Player: 0 | Computer: 0</div>
+        <div class="winner">🪨 beats ✂️, ✂️ beats 📃, 📃 beats 🪨.</div>
+        <button id="player-btn" class="player-btn end-round">Play Again?</button>
+    </section>
+</div>
     <script src="./app.js"></script>
 </body>
 </html>

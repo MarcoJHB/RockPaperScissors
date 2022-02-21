@@ -1,0 +1,89 @@
+/* Global Styles */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --header1: calc(1.5rem + 1vw);
+  --header2: calc(1rem + 1vw);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+
+h1,
+h2,
+h3,
+h4 {
+}
+
+h1 {
+  font-size: var(--header1);
+  padding-bottom: 1rem;
+}
+
+h2 {
+  font-size: var(--header2);
+}
+
+div,
+p {
+  font-family: "PT Sans", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title-section {
+  padding: 2rem;
+}
+
+.score-section {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#rock-btn, #paper-btn, #scissors-btn {
+    border: none;
+    background-color: coral;
+    padding: 0rem;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    font-size: 2rem;
+}
+
+#player-btn {
+    border: none;
+    background-color: lightblue;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+.end-round {
+    display: none;
+}
