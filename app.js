@@ -95,7 +95,10 @@ function playRound() {
         computerScore +
         ".";
       replayBtn.classList.remove("end-round");
-    } else {
+      buttons.forEach((button) =>
+        button.removeEventListener("click", playRound)
+      );
+    } else if (playerScore < computerScore) {
       console.log(
         `You lose! The computer won with a score of ${computerScore} to ${playerScore}`
       );
@@ -106,6 +109,18 @@ function playRound() {
         playerScore +
         ".";
       replayBtn.classList.remove("end-round");
+      buttons.forEach((button) =>
+        button.removeEventListener("click", playRound)
+      );
+    } else {
+      console.log(
+        `It's a tie! You both got a score of ${computerScore} to ${playerScore}`
+      );
+      winner.textContent = "It's a tie!! You both scored " + playerScore + ".";
+      replayBtn.classList.remove("end-round");
+      buttons.forEach((button) =>
+        button.removeEventListener("click", playRound)
+      );
     }
   }
 }
@@ -127,4 +142,6 @@ function resetGame() {
   playerScore = 0;
   computerScore = 0;
   round = 0;
+  replayBtn.classList.add("end-round");
+  buttons.forEach((button) => button.addEventListener("click", playRound));
 }
